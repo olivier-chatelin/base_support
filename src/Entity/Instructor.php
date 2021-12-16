@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InstructorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Instructor
      * @ORM\ManyToOne(targetEntity=Curriculum::class, inversedBy="instructors")
      */
     private $curriculum;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="instructor")
+     */
+    private $students;
+
+    public function __construct()
+    {
+        $this->students = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,36 @@ class Instructor
     public function setCurriculum(?Curriculum $curriculum): self
     {
         $this->curriculum = $curriculum;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Student[]
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students[] = $student;
+            $student->setInstructor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->removeElement($student)) {
+            // set the owning side to null (unless already changed)
+            if ($student->getInstructor() === $this) {
+                $student->setInstructor(null);
+            }
+        }
 
         return $this;
     }

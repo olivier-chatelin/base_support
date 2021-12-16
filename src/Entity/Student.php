@@ -37,6 +37,11 @@ class Student
      */
     private $curriculum;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Instructor::class, inversedBy="students")
+     */
+    private $instructor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,14 +71,14 @@ class Student
         return $this;
     }
 
-    public function getCamus(): ?Campus
+    public function getCampus(): ?Campus
     {
-        return $this->camus;
+        return $this->campus;
     }
 
-    public function setCamus(?Campus $camus): self
+    public function setCampus(?Campus $campus): self
     {
-        $this->camus = $camus;
+        $this->campus = $campus;
 
         return $this;
     }
@@ -86,6 +91,18 @@ class Student
     public function setCurriculum(?Curriculum $curriculum): self
     {
         $this->curriculum = $curriculum;
+
+        return $this;
+    }
+
+    public function getInstructor(): ?Instructor
+    {
+        return $this->instructor;
+    }
+
+    public function setInstructor(?Instructor $instructor): self
+    {
+        $this->instructor = $instructor;
 
         return $this;
     }
