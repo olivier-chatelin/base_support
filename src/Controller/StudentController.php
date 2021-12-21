@@ -52,4 +52,14 @@ class StudentController extends AbstractController
             'form' => $form
         ]);
     }
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete(ManagerRegistry $managerRegistry, Request $request, Student $student): Response
+    {
+        $manager = $managerRegistry->getManager();
+        $manager->remove($student);
+        $manager->flush();
+        return $this->redirectToRoute('home');
+    }
 }
