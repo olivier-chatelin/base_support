@@ -21,7 +21,7 @@ class InstructorFixtures extends Fixture implements DependentFixtureInterface
 
         $guillaume = new Instructor();
         $guillaume->setFirstname('Guillaume');
-        $guillaume->setLastname('Hariri');
+        $guillaume->setLastname('Harari');
         $guillaume->setCampus($this->getReference('bordeaux'));
         $guillaume->setCurriculum($this->getReference('PHP'));
         $manager->persist($guillaume);

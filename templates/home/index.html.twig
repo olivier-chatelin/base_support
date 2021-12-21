@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="h1">Liste des élèves</h1> <a class="btn btn-success" href="">Nouvel Elève</a>
+        <h1 class="h1">Liste des élèves</h1> <a class="btn btn-success m-3" href={{ path('student_new') }}>Nouvel Elève</a>
         <table class="table table-striped">
         <tr>
             <th>Prénom</th>
@@ -19,7 +19,7 @@
                 <td>{{ student.lastname }}</td>
                 <td>{{ student.curriculum.name }}</td>
                 <td>{{ student.campus.city }}</td>
-                <td><a class="btn btn-info" href={{ path('show',{id:student.id}) }}>Profil élève</a></td>
+                <td><a class="btn btn-primary" href={{ path('show',{id:student.id}) }}>Profil élève</a></td>
             </tr>
         {% endfor %}
         </table>
