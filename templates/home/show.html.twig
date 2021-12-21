@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <h1 class="h1">Liste des élèves</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Prénom élève</th>
+        <th>Nom élève</th>
+        <th>Cursus</th>
+        <th>Campus</th>
+        <th>Action</th>
+        <th>Prénom Formateur</th>
+        <th>Action</th>
+    </tr>
+        <tr>
+            <td>{{ student.firstname }}</td>
+            <td>{{ student.lastname }}</td>
+            <td>{{ student.curriculum.name }}</td>
+            <td>{{ student.campus.city }}</td>
+            <td>{{ student.instructor.firstname }}</td>
+            <td>{{ student.instructor.lastname }}</td>
+        </tr>
+</table>
+{% endblock %}

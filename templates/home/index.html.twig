@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h1">Liste des élèves</h1> <a class="btn btn-success" href="">Nouvel Elève</a>
+        <table class="table table-striped">
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Cursus</th>
+            <th>Campus</th>
+            <th>Action</th>
+        </tr>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.firstname }}</td>
+                <td>{{ student.lastname }}</td>
+                <td>{{ student.curriculum.name }}</td>
+                <td>{{ student.campus.city }}</td>
+                <td><a class="btn btn-info" href={{ path('show',{id:student.id}) }}>Profil élève</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    {% endblock %}
