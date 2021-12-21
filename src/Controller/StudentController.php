@@ -58,8 +58,11 @@ class StudentController extends AbstractController
     public function delete(ManagerRegistry $managerRegistry, Request $request, Student $student): Response
     {
         $manager = $managerRegistry->getManager();
-        $manager->remove($student);
-        $manager->flush();
+        if ($this->isCsrfTokenValid('delete'.$student->getId(), $request->request->get('_token'))) {
+            $manager->remove($student);
+            $manager->flush();
+        }
         return $this->redirectToRoute('home');
+
     }
 }

@@ -22,8 +22,11 @@
             <td>{{ student.instructor.firstname }}</td>
             <td>{{ student.instructor.lastname }}</td>
             <td class="d-flex flex-column">
-                <a class="btn btn-secondary" href={{ path('student_update',{id:student.id}) }}>Update {{ student.getFullName() }}</a>
-                <a class="btn btn-danger" href={{ path('student_delete',{id:student.id}) }}>Delete {{ student.getFullName() }}</a>
+                <a class="btn d-block btn-secondary m-1 w-50" href={{ path('student_update',{id:student.id}) }}>Update {{ student.getFullName() }}</a>
+                <form method="post" action="{{ path('student_delete', {id: student.id}) }}" >
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ student.id) }}">
+                    <button class="btn btn-danger m-1 w-50">Delete</button>
+                </form>
             </td>
         </tr>
 </table>
