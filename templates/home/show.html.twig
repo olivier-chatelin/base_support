@@ -21,6 +21,7 @@
             <td>{{ student.campus.city }}</td>
             <td>{{ student.instructor.firstname }}</td>
             <td>{{ student.instructor.lastname }}</td>
+            <td><a class="btn btn-secondary" href={{ path('student_update',{id:student.id}) }}>Update {{ student.getFullName() }}</a></td>
         </tr>
 </table>
 {% endblock %}

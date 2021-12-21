@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/student/new", name="new")
+     * @Route("/new", name="new")
      */
     public function new(ManagerRegistry $managerRegistry, Request $request): Response
     {
@@ -27,11 +27,28 @@ class StudentController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($student);
             $entityManager->flush();
-            $this->addFlash('success', 'L\'élève a bien ajouté');
+            $this->addFlash('success', 'L\'élève a bien été ajouté');
             return $this->redirectToRoute('home');
         }
 
         return $this->renderForm('student/index.html.twig', [
+            'form' => $form
+        ]);
+    }
+    /**
+     * @Route("/update/{id}", name="update")
+     */
+    public function update(ManagerRegistry $managerRegistry, Request $request, Student $student): Response
+    {
+        $entityManager = $managerRegistry->getManager();
+        $form = $this->createForm(StudentType::class, $student);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success',$student->getFullName() . ' a bien été modifié');
+            return $this->redirectToRoute('home');
+        }
+        return $this->renderForm('student/update.html.twig', [
             'form' => $form
         ]);
     }
